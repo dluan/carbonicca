@@ -1,37 +1,18 @@
-import { initializeApollo } from 'graphql/apollo-config'
-import {
-  GetDataDocument,
-  GetDataQuery,
-  GetDataQueryVariables
-} from 'graphql/generated'
-import Home from 'templates/Home'
+import Center from 'components/Center'
+import Image from 'next/image'
+import logo from '../../public/logo.png'
 
-export type HomeProps = {
-  title: string
-  subtitle: string
-  image: string
-}
-
-export async function getStaticProps() {
-  const apolloClient = initializeApollo()
-  const {
-    data: { data }
-  } = await apolloClient.query<GetDataQuery, GetDataQueryVariables>({
-    query: GetDataDocument,
-    variables: {
-      id: 'cl117fbrl1h2c0bkf80sjk4s5'
-    }
-  })
-
-  return {
-    props: {
-      title: data?.title,
-      subtitle: data?.subtitle,
-      image: data?.image.url
-    }
-  }
-}
-
-export default function Index(props: HomeProps) {
-  return <Home {...props} />
+export default function Index() {
+  return (
+    <>
+      <Center>
+        <Image
+          src={logo}
+          alt="6 quadrados no formato final da tabela periodica, o primeiro quadrado apresenta um destaque a mais, pois representa o simbolo do Carbono. Abaixo está o nome da empresa: Carbonicca."
+          width="165"
+          height="108"
+        />
+      </Center>
+    </>
+  )
 }
